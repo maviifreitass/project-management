@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <title>Login</title>
@@ -24,7 +24,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                    <img src="{{asset('backend/img/logo.png')}}" alt="Logo" class="mb-4" style="max-width: 180px;">
+                                    <img src="{{asset('assets/img/logo.png')}}" alt="Logo" class="mb-4" style="max-width: 180px;">
 
                                         <h1 class="h4 text-gray-900 mb-4">Bem vindo de volta!</h1>
                                         <p>Por favor, realize seu login</p>
