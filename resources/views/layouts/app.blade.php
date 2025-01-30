@@ -1,41 +1,61 @@
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+    TaskToDo
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
+<body
+    class="g-sidenav-show  bg-gray-100">
+    @auth
+        @yield('auth')
+    @endauth
+    @guest
+        @yield('guest')
+    @endguest
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @include('layouts.navigation')
+    @if(session()->has('success'))
+        <div x-data="{ show: true}" x-init="setTimeout(() => show = false, 4000)" x-show="show"
+            class="position-fixed bg-success rounded right-3 text-sm py-2 px-4">
+            <p class="m-0">{{ session('success')}}</p>
+        </div>
+    @endif
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    @stack('dashboard')
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
 
-        <!-- Page Heading -->
-        @isset($header)
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+    <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>
