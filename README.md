@@ -34,6 +34,6 @@ Certifique-se de ter instalado:
 
 ## Desenvolvedores 👩‍💻👨‍💻
 
-- Anthoni da luz
+- Anthoni da Luz
 - Maria Vitória
 - Miguel Serea
