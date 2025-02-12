@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto 🏢
 
-O TaskToDo é um sistema desenvolvido para facilitar a gestão de projetos dentro de uma empresa. A plataforma permite o gerenciamento de usuários, projetos, tarefas e clientes, garantindo organização e eficiência no fluxo de trabalho. ✅
+O TaskToDo é um sistema desenvolvido para facilitar a gestão de projetos dentro de uma empresa de marketing. A plataforma permite o gerenciamento de usuários, projetos, tarefas e clientes, garantindo organização e eficiência no fluxo de trabalho. ✅
 
 ## Funcionalidades Principais ⚡
 
@@ -32,8 +32,8 @@ Certifique-se de ter instalado:
 - **MySQL** 🗄️
 - **Git** 🔗
 
-## Desenvolvedores 👩‍💻
+## Desenvolvedores 👩‍💻👨‍💻
 
-- Anthoni daluz
+- Anthoni da luz
 - Maria Vitória
 - Miguel Serea
