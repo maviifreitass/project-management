@@ -32,7 +32,7 @@ Certifique-se de ter instalado:
 - **MySQL** 🗄️
 - **Git** 🔗
 
-## Desenvolvedores 👩‍💻👨‍💻
+## Desenvolvedores 👩‍💻
 
 - Anthoni da Luz
 - Maria Vitória
