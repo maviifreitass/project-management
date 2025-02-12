@@ -23,8 +23,6 @@ O TaskToDo é um sistema desenvolvido para facilitar a gestão de projetos dentr
 - **Gerenciamento Ágil:** Scrum + Trello 📌
 - **Deploy:** Laravel Forge e Envoyer 🚀
 
-## Instalação e Configuração ⚙️
-
 ### Pré-requisitos 📌
 
 Certifique-se de ter instalado:
@@ -33,3 +31,9 @@ Certifique-se de ter instalado:
 - **Node.js** 🌿
 - **MySQL** 🗄️
 - **Git** 🔗
+
+## Desenvolvedores 👩‍💻
+
+- Anthoni daluz
+- Maria Vitória
+- Miguel Serea
