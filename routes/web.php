@@ -27,4 +27,20 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 
+use App\Http\Controllers\ProjectController;
+
+Route::get('/project', function () {
+    return view('project');
+})->middleware('auth')->name('project');
+
+Route::post('/project', [ProjectController::class, 'store'])
+    ->middleware('auth')
+    ->name('project.store');
+
+
+    Route::get('/project-index', [ProjectController::class, 'index'])
+    ->middleware('auth')
+    ->name('project.index');
+
+
 require __DIR__.'/auth.php';
