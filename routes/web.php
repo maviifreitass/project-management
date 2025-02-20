@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MembersController;
 
 // Rota inicial redireciona para login
 Route::get('/', function () {
@@ -47,5 +48,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show'); // Visualizar tarefa
 });
 
+// Rotas protegidas para MemberController
+Route::middleware('auth')->group(function () {
+    Route::get('/members', [MembersController::class, 'index'])->name('members');
+});
+Route::get('/members/{id}/edit', [MembersController::class, 'edit'])->name('members.edit');
+Route::put('/members/{id}', [MembersController::class, 'update'])->name('members.update');
+Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
+
 // Importa rotas de autenticação padrão do Laravel Breeze ou Fortify (se estiver usando)
 require __DIR__.'/auth.php';
+
+
