@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Rota inicial redireciona para login
 Route::get('/', function () {
@@ -23,6 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::match(['get', 'post'], '/forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('forgot-password');
+
+// Certifique-se de que não há rotas como estas:
+Auth::routes(['reset' => false]);
+
 
 // Rotas de autenticação
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -49,21 +57,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
     
     // Rotas de edição e atualização
-    Route::get('/tasks/{id}/edit', [TaskController::class, 'index'])->name('tasks.edit');
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
     Route::post('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
 });
-
-
 
 // Rotas protegidas para MemberController
 Route::middleware('auth')->group(function () {
     Route::get('/members', [MembersController::class, 'index'])->name('members');
+    Route::get('/members/{id}/edit', [MembersController::class, 'edit'])->name('members.edit');
+    Route::put('/members/{id}', [MembersController::class, 'update'])->name('members.update');
+    Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 });
-Route::get('/members/{id}/edit', [MembersController::class, 'edit'])->name('members.edit');
-Route::put('/members/{id}', [MembersController::class, 'update'])->name('members.update');
-Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 
 // Importa rotas de autenticação padrão do Laravel
 require __DIR__.'/auth.php';
-
-
