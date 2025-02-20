@@ -4,7 +4,7 @@
 
     <div>
         @include('layouts.task')
-        
+
         <div class="container-fluid py-4">
             <div class="card">
                 <div class="card-header pb-0 px-3">
@@ -32,22 +32,32 @@
                                             <p class="text-xs text-secondary mb-0">{{ $task->description }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ 'Usuário Responsável' }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ 'Usuário' }}</p>
                                             <p class="text-xs text-secondary mb-0">{{  $task->user->name }}</p>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ 'Projeto' }}</p>
                                             <p class="text-xs text-secondary mb-0">{{  $task->project->name }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                        </td>
+
+
                                         <td class="align-middle text-center">
                                             <span
                                                 class="text-secondary text-xs font-weight-bold">{{ $task->created_at->format('d/m/y') }}</span>
                                         </td>
+
+                                        <td>
+                                            @if ($task->status == 'a_fazer')
+                                                <span class="badge bg-warning">A Fazer</span>
+                                            @elseif ($task->status == 'em_andamento')
+                                                <span class="badge bg-primary">Em Andamento</span>
+                                            @elseif ($task->status == 'completo')
+                                                <span class="badge bg-success">Completo</span>
+                                            @endif
+                                        </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('tasks.index', ['id' => $task->id]) }}" class="btn btn-sm btn-success">
+                                            <a href="{{ route('tasks.index', ['id' => $task->id]) }}"
+                                                class="btn btn-sm btn-success">
                                                 <i class="fas fa-edit"></i> Editar
                                             </a>
                                         </td>

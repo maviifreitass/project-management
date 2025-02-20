@@ -24,7 +24,15 @@ class ProjectController extends Controller
         ]);
 
         Project::create($dados);
-        return redirect()->route('dashboard')->with('success', 'Projeto criado com sucesso!');
+        return redirect()->route('project')->with('success', 'Projeto criado com sucesso!');
 
+    }
+
+    public function destroy($id)
+    {
+        $member = Project::findOrFail($id);
+        $member->delete();
+
+        return redirect()->route('project.index')->with('success', 'Projeto excluído com sucesso!');
     }
 }

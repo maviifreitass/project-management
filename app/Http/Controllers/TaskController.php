@@ -47,6 +47,7 @@ class TaskController extends Controller
             'project_id' => 'required|exists:projects,id',
             'user_id' => 'required|exists:users,id',
             'due_date' => 'required|date',
+            'status' => 'required|in:a_fazer,em_andamento,completo',
         ]);
 
         // Se o ID for passado, atualiza a tarefa existente

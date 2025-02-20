@@ -28,10 +28,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ 'teste' }}</p>
-                                            <p class="text-xs text-secondary mb-0">{{ 'teste' }}</p>
-                                        </td>
+
                                         <td class="align-middle text-center text-sm">
                                             <span class="badge badge-sm bg-gradient-success">Online</span>
                                         </td>
@@ -40,6 +37,17 @@
                                                 class="text-secondary text-xs font-weight-bold">{{ $project->created_at->format('d/m/y') }}</span>
                                         </td>
                                         <td class="align-middle">
+                                        </td>
+                                        <td class="align-middle">
+                                            <form action="{{ route('project.destroy', $project->id) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Tem certeza que deseja excluir este projeto?');">
+                                                    <i class="fas fa-trash-alt"></i> Deletar
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

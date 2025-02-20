@@ -6,6 +6,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\DashboardController;
 
 // Rota inicial redireciona para login
 Route::get('/', function () {
@@ -16,6 +17,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 
 // Grupo de rotas protegidas para o perfil do usuário
 Route::middleware('auth')->group(function () {
@@ -37,6 +42,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/project', [ProjectController::class, 'store'])->name('project.store');
     Route::get('/project-index', [ProjectController::class, 'index'])->name('project.index');
+    Route::get('/project/{id}/edit', [projectController::class, 'edit'])->name('project.edit');
+    Route::put('/project/{id}', [projectController::class, 'update'])->name('project.update');
+    Route::delete('/project/{id}', [projectController::class, 'destroy'])->name('project.destroy');
 });
 
 // Rotas protegidas para TaskController
@@ -47,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-    
+
     // Rotas de edição e atualização
     Route::get('/tasks/{id}/edit', [TaskController::class, 'index'])->name('tasks.edit');
     Route::post('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
@@ -64,6 +72,6 @@ Route::put('/members/{id}', [MembersController::class, 'update'])->name('members
 Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 
 // Importa rotas de autenticação padrão do Laravel
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 

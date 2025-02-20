@@ -78,6 +78,16 @@
                                         value="{{ old('due_date', $editTask->due_date ?? '') }}" required>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select id="status" name="status" class="form-control">
+                                        <option value="a_fazer">A Fazer</option>
+                                        <option value="em_andamento">Em Andamento</option>
+                                        <option value="completo">Completo</option>
+                                    </select>
+                                </div>
+
                         </div>
 
                         <div class="form-group">
