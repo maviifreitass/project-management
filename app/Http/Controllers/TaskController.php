@@ -9,56 +9,63 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    // Exibir todas as tarefas
-    public function index()
+    // Exibir todas as tarefas, incluindo a lógica para edição
+    public function index(Request $request)
     {
-        // Obtendo todas as tarefas do banco de dados
+        // Obtendo os dados do banco
         $tasks = Task::all();
-        
-        // Retornando a view e passando as tarefas para ela
-        return view('tasks.index', compact('tasks'));
+        $projects = Project::all();
+        $users = User::all();
+        $editTask = null;
+
+        // Verifica se foi passado um ID para edição via query string
+        if ($request->has('id')) {
+            $editTask = Task::find($request->id);
+        }
+
+        // Retornando a view e passando os dados
+        return view('tasks.index', compact('tasks', 'projects', 'users', 'editTask'));
     }
 
-    // Mostrar formulário para criar uma nova tarefa
-    public function create()
+    // Exibir todas as tarefas na página viewAll
+    public function viewAll()
     {
-        // Obtendo todos os projetos e usuários
+        $tasks = Task::all();
         $projects = Project::all();
         $users = User::all();
 
-        // Passando os projetos e usuários para a view de criação
-        return view('tasks.create', compact('projects', 'users'));
+        return view('tasks.tasks', compact('tasks', 'projects', 'users'));
     }
 
-    // Salvar nova tarefa
+    // Salvar ou atualizar uma tarefa
     public function store(Request $request)
     {
         // Validando os dados recebidos do formulário
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'nullable',
-            'project_id' => 'required|exists:projects,id', // Validando a existência do projeto
-            'user_id' => 'required|exists:users,id', // Validando a existência do usuário
-            'due_date' => 'required|date', // Validando a data
+            'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
+            'due_date' => 'required|date',
         ]);
 
-        // Criando a nova tarefa no banco de dados
-        Task::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'user_id' => $request->user_id, // Atribuindo o ID do usuário selecionado
-            'project_id' => $request->project_id, // Atribuindo o ID do projeto selecionado
-            'due_date' => $request->due_date, // Atribuindo a data de vencimento
-        ]);
+        // Se o ID for passado, atualiza a tarefa existente
+        if ($request->id) {
+            $task = Task::findOrFail($request->id);
+            $task->update($request->all());
+            return redirect()->route('tasks.index')->with('success', 'Tarefa atualizada com sucesso!');
+        }
 
-        // Redirecionando para a página de índice com uma mensagem de sucesso
+        // Criando nova tarefa
+        Task::create($request->all());
         return redirect()->route('tasks.index')->with('success', 'Tarefa criada com sucesso!');
     }
 
-    // Visualizar uma tarefa específica
-    public function show(Task $task)
+    public function destroy($id)
     {
-        // Retornando a view para mostrar os detalhes da tarefa
-        return view('tasks.show', compact('task'));
+        $task = Task::findOrFail($id);
+        $task->delete();
+
+        return redirect()->route('tasks.index')->with('success', 'Tarefa excluída com sucesso!');
     }
 }

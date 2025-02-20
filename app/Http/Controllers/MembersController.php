@@ -24,5 +24,5 @@ class MembersController extends Controller
         $member->delete();
 
         return redirect()->route('members')->with('success', 'Membro excluído com sucesso!');
-    }
+    }
 }

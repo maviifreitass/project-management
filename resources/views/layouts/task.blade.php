@@ -12,7 +12,7 @@
                         {{ __('Tarefas') }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        {{ __('Visualize suas tarefas') }}
+                        {{ __('Visualize suas tarefas cadastradas') }}
                     </p>
                 </div>
             </div>
@@ -20,8 +20,8 @@
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 {{ request()->is('task-index') ? 'active' : '' }}"
-                                href="{{ route('task.index') }}" role="tab">
+                            <a class="nav-link mb-0 px-0 py-1 {{ request()->is('tasks') ? 'active' : '' }}"
+                                href="{{ route('tasks.viewAll') }}" role="tab">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
@@ -48,8 +48,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 {{ request()->is('project') ? 'active' : '' }}"
-                                href="{{ route('project') }}" role="tab">
+                            <a class="nav-link mb-0 px-0 py-1 {{ request()->is('tasks-index') ? 'active' : '' }}"
+                                href="{{ route('tasks.index') }}" role="tab">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"

@@ -42,11 +42,18 @@ Route::middleware('auth')->group(function () {
 // Rotas protegidas para TaskController
 Route::middleware('auth')->group(function () {
     Route::get('/tasks-index', [TaskController::class, 'index'])->name('tasks.index');
-    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index'); // Página principal de tarefas
-    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create'); // Criar nova tarefa
-    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store'); // Armazenar tarefa
-    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show'); // Visualizar tarefa
+    Route::get('/tasks', [TaskController::class, 'viewAll'])->name('tasks.viewAll');
+    Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+    Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    
+    // Rotas de edição e atualização
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'index'])->name('tasks.edit');
+    Route::post('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
 });
+
+
 
 // Rotas protegidas para MemberController
 Route::middleware('auth')->group(function () {
@@ -56,7 +63,7 @@ Route::get('/members/{id}/edit', [MembersController::class, 'edit'])->name('memb
 Route::put('/members/{id}', [MembersController::class, 'update'])->name('members.update');
 Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 
-// Importa rotas de autenticação padrão do Laravel Breeze ou Fortify (se estiver usando)
+// Importa rotas de autenticação padrão do Laravel
 require __DIR__.'/auth.php';
 
 
