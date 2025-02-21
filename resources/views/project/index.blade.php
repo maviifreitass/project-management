@@ -4,7 +4,7 @@
 
     <div>
         @include('layouts.project')
-        
+
         <div class="container-fluid py-4">
             <div class="card">
                 <div class="card-header pb-0 px-3">
@@ -18,10 +18,7 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                        alt="user1">
-                                                </div>
+
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $project->name }}</h6>
                                                     <p class="text-xs text-secondary mb-0">{{ $project->description }}</p>
@@ -29,14 +26,17 @@
                                             </div>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                        </td>
                                         <td class="align-middle text-center">
                                             <span
                                                 class="text-secondary text-xs font-weight-bold">{{ $project->created_at->format('d/m/y') }}</span>
                                         </td>
                                         <td class="align-middle">
+                                        <td class="align-middle">
+                                            <a href="{{ route('tasks.index', ['id' => $project->id]) }}"
+                                                class="btn btn-sm btn-success">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+                                        </td>
                                         </td>
                                         <td class="align-middle">
                                             <form action="{{ route('project.destroy', $project->id) }}" method="POST"

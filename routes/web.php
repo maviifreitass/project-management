@@ -7,6 +7,7 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Rota inicial redireciona para login
@@ -76,6 +77,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/members/{id}', [MembersController::class, 'update'])->name('members.update');
     Route::delete('/members/{id}', [MembersController::class, 'destroy'])->name('members.destroy');
 });
+
+Route::resource('goals', GoalController::class)
+    ->middleware(['auth', 'verified']);
+
 
 // Importa rotas de autenticação padrão do Laravel
 require __DIR__ . '/auth.php';

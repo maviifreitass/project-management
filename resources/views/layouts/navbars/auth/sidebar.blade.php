@@ -134,7 +134,7 @@
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Gerenciamento</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link  " href="{{ url('settings') }}">
+      <a class="nav-link {{ (Request::is('goals') ? 'active' : '') }}" href="{{ url('goals') }}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +159,7 @@
               </g>
             </svg>
           </div>
-          <span class="nav-link-text ms-1">Configurações</span>
+          <span class="nav-link-text ms-1">Metas</span>
         </a>
       </li>
       <li class="nav-link mb-0">
