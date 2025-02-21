@@ -31,12 +31,7 @@
                                                 class="text-secondary text-xs font-weight-bold">{{ $project->created_at->format('d/m/y') }}</span>
                                         </td>
                                         <td class="align-middle">
-                                        <td class="align-middle">
-                                            <a href="{{ route('tasks.index', ['id' => $project->id]) }}"
-                                                class="btn btn-sm btn-success">
-                                                <i class="fas fa-edit"></i> Editar
-                                            </a>
-                                        </td>
+
                                         </td>
                                         <td class="align-middle">
                                             <!-- Botão EDITAR (Verde) -->

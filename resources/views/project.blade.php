@@ -3,7 +3,7 @@
 @section('content')
 
     <div>
-    @include('layouts.project')
+        @include('layouts.project')
 
         <div class="container-fluid py-4">
             <div class="card">
@@ -13,13 +13,13 @@
                     </h6>
                 </div>
                 <div class="card-body pt-4 p-3">
-                    <form action="{{ isset($project) ? route('project.update', $project->id) : route('project.store') }}" 
-                          method="POST" role="form text-left">
+                    <form action="{{ isset($project) ? route('project.update', $project->id) : route('project.store') }}"
+                        method="POST" role="form text-left">
                         @csrf
                         @if(isset($project))
                             @method('PUT')
                         @endif
-                        
+
                         @if($errors->any())
                             <div class="mt-3 alert alert-primary alert-dismissible fade show" role="alert">
                                 <span class="alert-text text-white">
@@ -30,7 +30,7 @@
                                 </button>
                             </div>
                         @endif
-                        
+
                         @if(session('success'))
                             <div class="m-3 alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
                                 <span class="alert-text text-white">
@@ -47,9 +47,9 @@
                                 <div class="form-group">
                                     <label for="project-name" class="form-control-label">Nome</label>
                                     <div class="@error('name') border border-danger rounded-3 @enderror">
-                                        <input class="form-control" 
-                                               value="{{ isset($project) ? $project->name : old('name') }}" 
-                                               type="text" placeholder="Nome do Projeto" id="name" name="name">
+                                        <input class="form-control"
+                                            value="{{ isset($project) ? $project->name : old('name') }}" type="text"
+                                            placeholder="Nome do Projeto" id="name" name="name">
                                         @error('name')
                                             <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                         @enderror
@@ -62,7 +62,8 @@
                             <label for="description">Descrição</label>
                             <div class="@error('description') border border-danger rounded-3 @enderror">
                                 <textarea class="form-control" id="description" rows="3"
-                                          placeholder="Por favor, descreva seu projeto" name="description">{{ isset($project) ? $project->description : old('description') }}</textarea>
+                                    placeholder="Por favor, descreva seu projeto"
+                                    name="description">{{ isset($project) ? $project->description : old('description') }}</textarea>
                             </div>
                         </div>
 
