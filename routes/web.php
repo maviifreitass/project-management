@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/project/{id}/edit', [projectController::class, 'edit'])->name('project.edit');
     Route::put('/project/{id}', [projectController::class, 'update'])->name('project.update');
     Route::delete('/project/{id}', [projectController::class, 'destroy'])->name('project.destroy');
+    Route::get('/project/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::put('/project/{id}', [ProjectController::class, 'update'])->name('project.update');
+
 });
 
 // Rotas protegidas para TaskController

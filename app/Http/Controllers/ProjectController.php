@@ -6,7 +6,6 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
 class ProjectController extends Controller
 {
     // Método para exibir todos os projetos
@@ -37,6 +36,26 @@ class ProjectController extends Controller
 
         // Redireciona com uma mensagem de sucesso
         return redirect()->route('project.index')->with('success', 'Projeto criado com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        $project = Project::findOrFail($id);
+        $projects = Project::all();
+        return view('project.index', compact('project', 'projects'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $dados = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $project = Project::findOrFail($id);
+        $project->update($dados);
+
+        return redirect()->route('project.index')->with('success', 'Projeto atualizado com sucesso!');
     }
 
     // Método para excluir um projeto
