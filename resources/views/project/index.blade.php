@@ -39,6 +39,12 @@
                                         <td class="align-middle">
                                         </td>
                                         <td class="align-middle">
+                                            <!-- Botão EDITAR (Verde) -->
+                                            <a href="{{ route('project.edit', $project->id) }}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+
+                                            <!-- Botão DELETAR (Vermelho) -->
                                             <form action="{{ route('project.destroy', $project->id) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf

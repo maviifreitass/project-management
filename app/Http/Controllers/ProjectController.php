@@ -6,16 +6,14 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
 class ProjectController extends Controller
 {
     public function index()
     {
         $projects = Project::all();
-        return view('project.index', compact('projects')); 
+        return view('project.index', compact('projects'));
     }
     
-
     public function store(Request $request)
     {
         $dados = $request->validate([
@@ -24,8 +22,27 @@ class ProjectController extends Controller
         ]);
 
         Project::create($dados);
-        return redirect()->route('project')->with('success', 'Projeto criado com sucesso!');
+        return redirect()->route('project.index')->with('success', 'Projeto criado com sucesso!');
+    }
 
+    public function edit($id)
+    {
+        $project = Project::findOrFail($id);
+        $projects = Project::all();
+        return view('project.index', compact('project', 'projects'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $dados = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $project = Project::findOrFail($id);
+        $project->update($dados);
+
+        return redirect()->route('project.index')->with('success', 'Projeto atualizado com sucesso!');
     }
 
     public function destroy($id)
